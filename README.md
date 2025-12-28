@@ -12,7 +12,6 @@ This project develops a deep learning–based customer churn prediction system d
 It leverages:
 - Recurrent Neural Networks (RNNs)
 - Long Short-Term Memory (LSTM) architectures
-
 to analyze sequential user behavior and transactional patterns to predict churn risk early.
 
 This project demonstrates my ability to:
@@ -24,8 +23,16 @@ This project demonstrates my ability to:
 By using LSTMs, the system captures long-term dependency patterns that traditional ML models often miss.
 
 ---
+## 2. Architecture Diagram
 
-## 2. Data & Feature Engineering
+<img src="results/architecture_diagram.png" width="700">
+
+**Explanation:**  
+Raw mobile money activity logs are transformed into sequential datasets, processed through RNN/LSTM models, and converted into churn probability predictions and actionable insights.
+
+---
+
+## 3. Data & Feature Engineering
 
 Dataset: `mobile_money_logs.csv`
 
@@ -53,12 +60,12 @@ These features enable meaningful understanding of **how user behavior evolves ov
 
 ---
 
-## 3. Machine Learning Models Used
+## 4. Machine Learning Models Used
 This project evaluates both traditional ML and advanced deep learning sequence models to determine the most effective churn prediction approach.
 
 ---
 
-### 3.1 Baseline Classical ML Models  
+### 4.1 Baseline Classical ML Models  
 Used for benchmarking performance:
 - Logistic Regression  
 - Random Forest  
@@ -69,7 +76,7 @@ Traditional ML treats user behavior as isolated snapshots instead of evolving se
 
 ---
 
-### 3.2 Deep Learning Sequence Models
+### 4.2 Deep Learning Sequence Models
 
 #### Recurrent Neural Network (RNN)
 - Captures short-term sequential behavior  
@@ -86,10 +93,21 @@ Traditional ML treats user behavior as isolated snapshots instead of evolving se
 Result: **LSTM selected as the final model**.
 
 ---
+#### 4.3 LSTM Model Call
 
-## 4. Model Performance & Evaluation Results
+```python
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
 
-### 4.1 Performance Comparison
+model = Sequential()
+model.add(LSTM(64, input_shape=(seq_len, num_features)))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+```
+
+## 5. Model Performance & Evaluation Results
+
+### 5.1 Performance Comparison
 
 | Model | Accuracy | Recall (Churn) | AUC |
 |------|---------|----------------|------|
@@ -105,7 +123,7 @@ Result: **LSTM selected as the final model**.
 
 ---
 
-### 4.2 Confusion Matrix
+### 5.2 Confusion Matrix
 <img src="results/confusion_matrix.png" width="700">
 
 **Summary:**  
@@ -114,27 +132,18 @@ This demonstrates strong predictive reliability for real-world retention strateg
 
 ---
 
-### 4.3 ROC Curve
+### 5.3 ROC Curve
 <img src="results/roc_curve.png" width="700">
 
 Shows strong discrimination capability, illustrating reliable separation between churn and non-churn users.
 
 ---
 
-### 4.4 Churn Risk Heatmap
+### 5.4 Churn Risk Heatmap
 <img src="results/churn_risk_heatmap.png" width="700">
 
 **Summary:**  
 Highlights behavioral risk trends across segments over time, enabling proactive and targeted retention initiatives.
-
----
-
-## 5. Architecture Diagram
-
-<img src="results/architecture_diagram.png" width="700">
-
-**Explanation:**  
-Raw mobile money activity logs are transformed into sequential datasets, processed through RNN/LSTM models, and converted into churn probability predictions and actionable insights.
 
 ---
 
@@ -234,7 +243,7 @@ python predict.py
 
 Creates:
 ```
-results/example_predictions.csv
+results/predictions.csv
 ```
 
 ---
@@ -259,7 +268,3 @@ This work contributes to strengthening digital financial ecosystems by:
 
 ---
 
-## 13. Contact
-**Everlyn Musembi**  
-Machine Learning & FinTech Security  
-LinkedIn: (add link)
